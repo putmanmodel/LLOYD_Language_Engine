@@ -1,0 +1,5 @@
+{
+  "POLARITY_THRESHOLD": 0.15,
+  "EMPHASIS_OVERRIDE": 0.75,
+  "RARE_TAGS": ["lament", "awe", "reverence", "resignation"]
+}

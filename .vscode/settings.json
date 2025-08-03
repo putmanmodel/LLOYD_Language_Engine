@@ -1,0 +1,16 @@
+{
+  "python.analysis.extraPaths": [
+    "/Users/stephenaputmanjr/Desktop",
+    "./",
+    "./lloyd_drift_demo"
+  ],
+  "python.autoComplete.extraPaths": [
+    "/Users/stephenaputmanjr/Desktop",
+    "./",
+    "./lloyd_drift_demo"
+  ],
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.linting.mypyEnabled": true,
+  "python.analysis.typeCheckingMode": "basic"
+}
