@@ -1,15 +1,22 @@
 import sys
+import os
 from pathlib import Path
 import streamlit as st
 import pandas as pd
 from textblob import TextBlob
 import csv
 from datetime import datetime
+
 # === Path Setup ===
 APP_DIR = Path(__file__).resolve().parent
 SANDBOX_DIR = APP_DIR.parent
 REPO_ROOT = SANDBOX_DIR.parent.parent
-sys.path.append(str(REPO_ROOT / "src"))
+
+# ✅ Required for Streamlit Cloud to find your src modules
+SRC_PATH = str(REPO_ROOT / "src")
+if SRC_PATH not in sys.path:
+    sys.path.insert(0, SRC_PATH)
+
 # === Import Drift Logic ===
 from lloyd_drift_demo.engine.drift_engine import analyze_drift
 import lloyd_drift_demo.engine.drift_engine as dbg
@@ -19,6 +26,8 @@ print("🔥 Using drift_engine from:", dbg.__file__)
 OUTPUTS_PATH = SANDBOX_DIR / "outputs"
 OUTPUTS_PATH.mkdir(parents=True, exist_ok=True)
 LOG_FILE = OUTPUTS_PATH / "drift_log.csv"
+
+# === Utility Functions ===
 
 def compute_slope(history):
     if len(history) < 2:
@@ -53,7 +62,8 @@ def save_drift_log(row):
 def get_sentiment_polarity(text: str) -> float:
     return float(getattr(TextBlob(text).sentiment, "polarity", 0.0))
 
-# === UI ===
+# === Streamlit UI ===
+
 st.set_page_config(page_title="L.L.O.Y.D. Tone Drift", layout="centered")
 st.title("🎛️ L.L.O.Y.D. Tone Drift Analyzer")
 st.caption("L.L.O.Y.D. emulates unconscious filtering in language and symbol recognition. The logic can apply to multimodal input.")
@@ -124,9 +134,6 @@ if analyze_clicked:
         st.markdown(f"**Tone Badge:** `{result.tone_badge}`")
         st.markdown(f"**Rationale:** {result.rationale}")
         st.markdown(f"**Drift Arc Slope:** `{round(slope, 3)}`")
-
-        ##st.subheader("🧠 Empathic Context (Optional)")
-        ##st.markdown(f"**Auto Sentiment Polarity:** `{polarity}`")
 
         log_row = {
             "phrase": user_input,
