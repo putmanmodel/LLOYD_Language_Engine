@@ -53,7 +53,7 @@ Here’s how it stacks up:
 ## 🧪 Quick Start
 
 ```bash
-pip install lloyd-drift  # placeholder for future release
+pip install lloyd-engine  # placeholder for future release
 python devtools/run.py
 ```
 
@@ -149,7 +149,7 @@ You can copy and paste full Python files into ChatGPT to get live analysis, refa
 ## 🗂 Project Structure
 
 ```
-lloyd_drift_demo/
+📁 lloyd_drift_demo/
 ├── devtools/
 │   ├── run.py
 │   └── sandbox_demo/app/app.py
@@ -157,9 +157,8 @@ lloyd_drift_demo/
 │   ├── engine/
 │   ├── drift_utils.py
 │   └── override_scores.py
-├── media/
-│   └── graph.png
-└── examples/ (planned)
+📁 media/
+└── examples/   # (Planned)
 ```
 
 ---
