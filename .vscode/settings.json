@@ -1,13 +1,9 @@
 {
   "python.analysis.extraPaths": [
-    "/Users/stephenaputmanjr/Desktop",
-    "./",
-    "./lloyd_drift_demo"
+    "./src"
   ],
   "python.autoComplete.extraPaths": [
-    "/Users/stephenaputmanjr/Desktop",
-    "./",
-    "./lloyd_drift_demo"
+    "./src"
   ],
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,

@@ -1,4 +1,4 @@
-
+import difflib
 import re
 from textblob import TextBlob
 from typing import Optional
@@ -19,12 +19,12 @@ def symbolic_emphasis_score(text: str) -> float:
 # === Polarity ===
 def get_polarity_score(text: str) -> float:
     blob = TextBlob(text)
-    polarity: float = blob.sentiment.polarity
+    polarity = float(blob.sentiment.polarity)  # type: ignore[attr-defined]
     return round(polarity, 3)
 
 # === Symbolic Override ===
 def detect_symbolic_override(text: str) -> Optional[str]:
-    if re.search(r"\bOMG\b|\bWTF\b", text.upper()):
+    if re.search(r"\b(OMG|WTF|awe|wonder|divine|miracle|sacred|heavens?)\b", text.lower()):
         return "symbolic_override"
     return None
 
@@ -47,11 +47,11 @@ def is_hedge_override(baseline: str, incoming: str) -> bool:
     return False
 
 # === Emphasis Override ===
-def is_emphasis_override(incoming: str) -> bool:
+def is_emphasis_override(baseline: str, incoming: str) -> bool:
     return symbolic_emphasis_score(incoming) > EMPHASIS_OVERRIDE
 
 # === Emoji Emphasis Override ===
-def is_emoji_override(incoming: str) -> bool:
+def is_emoji_override(baseline: str,incoming: str) -> bool:
     emoji_count = len(re.findall(r"[😂🤣😡😢😍😭❤️]", incoming))
     return emoji_count >= 2
 
@@ -60,7 +60,22 @@ def is_negation_amplified(baseline: str, incoming: str) -> bool:
     neg = re.search(r"\b(don’t|not|never)\b", incoming.lower())
     blob_base = TextBlob(baseline)
     blob_inc = TextBlob(incoming)
-    return bool(neg) and (blob_base.sentiment.polarity > 0 and blob_inc.sentiment.polarity <= 0)
+    return bool(neg) and (float(blob_base.sentiment.polarity) > 0 and float(blob_inc.sentiment.polarity) <= 0)  # type: ignore[attr-defined]
+
+def is_gray_zone_ambiguous(baseline: str, incoming: str, slope: float = 0.0) -> bool:
+    gray_zone_terms = [
+        "dead right", "i'm dying", "kill me", "rip me", "drop dead", "just shoot me", 
+        "lol i'm dead", "dead inside", "bury me", "i'm toast", "end me", "rip my soul",
+        "you're killing me", "he's killing me", "this is killing me"
+    ]
+    direction = get_directional_target(incoming)
+    norm_inc = normalize(incoming)
+
+    return (
+        any(phrase in norm_inc for phrase in gray_zone_terms)
+        and direction in {"self", "other"}
+        and slope < -0.2
+    )
 
 # === Rhetorical Drift ===
 def is_rhetorical_drift(baseline: str, incoming: str) -> bool:
@@ -71,3 +86,31 @@ def is_rhetorical_drift(baseline: str, incoming: str) -> bool:
 # === Sarcasm Hint ===
 def has_sarcasm_hint(incoming: str) -> bool:
     return re.search(r"/s\b|🙃|sure\.", incoming.lower()) is not None
+
+def compute_emphasis_score(text: str) -> float:
+    return symbolic_emphasis_score(text)
+
+def compute_polarity_score(text: str) -> float:
+    return get_polarity_score(text)
+
+def shared_root(text1: str, text2: str) -> bool:
+    seq = difflib.SequenceMatcher(None, text1.lower(), text2.lower())
+    return seq.quick_ratio() > 0.6
+
+def is_uppercase_yelling(text: str) -> bool:
+    return text.isupper() and len(text) >= 4
+
+def get_directional_target(text: str) -> str:
+    text = text.lower()
+    if re.search(r"\b(i|me|myself)\b", text):
+        return "self"
+    elif re.search(r"\b(you|your|you're|u)\b", text):
+        return "other"
+    elif re.search(r"\b(he|she|they|this|that|it)\b", text):
+        return "ambient"
+    return "unknown"
+
+def normalize(text: str) -> str:
+    return re.sub(r"[^\w\s]", "", text.lower()).strip()
+
+get_sentiment_polarity = get_polarity_score

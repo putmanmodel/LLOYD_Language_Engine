@@ -1,139 +1,198 @@
-# TODO: Capture drift plot screenshot for README after sample session
-# Suggest scenario: calm baseline → rising incoming tension → spike in Δ
+# L.L.O.Y.D. — Language Layers Over Your Data
 
-Yes — you’ve already built a strong foundation for a standout README. Here’s a checklist of everything we’ve discussed that can boost the final README and make it shine for future users, collaborators, or curious developers:
+A symbolic drift detection and tone deviation engine that listens like a human would — tracking not just sentiment, but **meaning breaks**, **symbolic conflict**, and **emotional escalation**.
 
-⸻
+---
 
-✅ README Boost Checklist (based on our discussion)
+## 🔍 What Is LLOYD?
 
-1. 🌀 Clear Project Summary
+LLOYD isn’t another sentiment classifier.  
+It’s a drift-aware analyzer that tells you when **a conversation turns** — emotionally, symbolically, or relationally.
 
-LLOYD: Language Layer Over Your Data
-A symbolic drift detector and narrative tone tracker. Designed to detect when a conversation shifts emotionally, symbolically, or empathically — not just semantically.
+From sarcastic reversals to performative breakdowns, LLOYD is designed to detect subtle shifts in tone that traditional NLP often misses.
 
-⸻
+> ✅ *Calibration is limited, but customizable.*  
+> LLOYD is lightly tuned, but designed for adaptation to domain-specific tone models.
 
-2. 🧪 Drift Detection Demo
-	•	CLI interface that logs baseline vs. incoming phrases
-	•	JSONL journal output with drift flags and rationale
-	•	Sample output snippet (copy-paste example block)
-	•	Graph screenshot placeholder
+> ✅ *Work-in-progress with feedback welcome.*  
+> This is an active project — contributions, questions, and use-case tests are encouraged.  
+> Contact: [putmanmodel@pm.me](mailto:putmanmodel@pm.me)
 
-{"baseline": "I love this.", "incoming": "I hate this.", "drift": true, "rationale": "Polarity shift from 0.50 → -1.00 (Δ=-1.50)"}
+---
 
+## ✨ What Makes It Different?
 
-⸻
+## 🧱 How LLOYD Compares: Above the Stack
 
-3. 📊 Drift Graph Explanation
-	•	Drift score over time → seismograph of emotional breaks
-	•	Placeholder screenshot section (added above)
-	•	Plan to show symbolic tension escalation
+LLOYD doesn’t just label tone — it listens like a person, tracking symbolic shifts, emotional slope, and layered meaning.
 
-⸻
+Here’s how it stacks up:
 
-4. 🧠 Symbolic Emphasis Notes
-	•	Optional override logic based on symbolic weight (e.g. “my heart” ≠ literal)
-	•	Mention plans for fragment overrides, poetic tag mapping, or token weighting in future versions
+| Tier            | Model Type            | Capabilities                                  | Notes                                                  |
+|-----------------|-----------------------|-----------------------------------------------|--------------------------------------------------------|
+| 🟩 **LLOYD**     | Symbolic Drift Engine | Emotional drift scoring, override logic, symbolic pattern detection, sarcasm flags, badges | ✅ Built for human-level nuance and meaning tracking   |
+| 🟨 Mid-Level     | Sentiment Classifier  | Polarity scoring, intensity detection         | ⚠️ Misses sarcasm, symbolic shifts, escalation cues     |
+| 🟥 Legacy        | Keyword Matcher       | Token triggers, emotion word lists            | ❌ Fails on nuance, symbolic inversion, or context      |
 
-⸻
+> 🟢 *LLOYD hears the difference between “Great job” and “Great job…”*  
+> 🔴 *Others just check for “positive” or “negative.”*
 
-5. 💾 Data + CLI Notes
-	•	CLI usage: python cli_drift_test.py
-	•	Analyzer usage: python analyze_session.py
-	•	Sample session.jsonl file structure
-	•	Reminder not to commit nltk_data or venv/ (add .gitignore tip)
+> **Please note**: LLOYD is already scaffolded for *Drift Memory* and short-term tone weighting —  
+> this table excludes those in-progress features until the official demo drops.
 
-⸻
+✨ *It’s better — and it’s not even done yet.*
 
-6. 🔮 Future Integration with Spanda
-	•	Tease future fusion with Spanda symbolic engine
-	•	Optional tag: “Designed to sync with resonance fields and symbolic memory tracking”
+- Symbolic override detection (`"Great job…"`, `"You helped?"`)
+- Emphasis escalation tracking (`ALL CAPS`, `!!!`, emoji floods)
+- Drift memory modeling to detect emotional pressure buildup
+- Mirror match and mocked echo detection
+- Output includes rationale, badge label, override label
 
-⸻
+---
 
-7. 💡 Why This Matters
+## 🧪 Quick Start
 
-Most sentiment trackers stop at polarity.
-LLOYD tracks the moment meaning breaks — when something is emotionally misaligned, symbolically hostile, or empathically off.
-This makes it ideal for building emotionally intelligent bots, UI feedback systems, or symbolic AI agents.
+```bash
+pip install lloyd-drift  # placeholder for future release
+python devtools/run.py
+```
 
-⸻
+Sample output:
 
-8. 🚀 Quickstart + Requirements
-	•	pip install -r requirements.txt
-	•	Python 3.11+ virtual environment setup instructions
-	•	Option to run sample test entries (you can include a small .jsonl in /examples/)
+```text
+Badge    : 🛳 override: emphasis_override
+🔹 [sarcasm_hint]
+Baseline : Great job.
+Incoming : Great job...
+Drift    : True
+Label    : sarcasm_hint
+Δ        : 80
+Rationale: Trailing or embedded sarcasm marker detected.
+```
 
-⸻
+---
 
-Want me to generate a polished README.md with all these baked in when you’re ready? Or a skeleton version to fill in?
+## 🌐 Streamlit GUI
 
-### 🧠 Coming Soon: Advanced Symbolic Drift Detection <-- should read "Currently In Development and Coming Soon"
+Launch the visual interface:
+```bash
+streamlit run devtools/sandbox_demo/app/app.py
+```
 
-LLOYD is evolving beyond polarity-based tone tracking. Planned enhancements include:
+Try this real example:
 
-- Sarcasm hints via ellipsis (`...`) and rhetorical questions (`?`)
-- Mocked echo detection with emphasis escalation
-- Symbolic negation triggers (`not`, `don’t`, `never`)
-- Emoji-based emphasis scoring
-- Lightweight slang polarity mapping (`meh`, `stoked`, etc.)
-- Multi-turn memory pool with weighted decay
+```text
+Baseline : Why wasn’t this done earlier?
+Incoming : You are garbage.
+Drift    : True
+Label    : hostile_emphasis
+Δ        : 92
+Badge    : 🛳 override: hostile_emphasis
+Rationale: Intensified hostile language detected — override triggered.
+```
 
-⚡ These will help LLOYD catch subtle emotional breaks — especially in sarcastic, passive-aggressive, or mimicked tone shifts.
+---
 
-💾 **Coming soon: data donation welcome.**  
-If you're building chat systems, UIs, or symbolic agents, your anonymized samples can help shape the model.
+## 📊 Drift Graph — Tone Shift Over Time
 
-🧠 Drift Memory (NEW)
+![Drift Graph](media/graph.png)
 
-DriftMemory adds lightweight short-term memory to track recent drift scores.
-When tension builds over several turns (e.g., repeated passive aggression), the system will amplify its rationale accordingly.
-memory = DriftMemory()
-result = analyze_drift("I'm fine", "I SAID I'M FINE!!!", memory=memory)
+This plot captures real drift data across a conversation, showing:
 
-⚡ Field Responsiveness
+- Δ tone changes turn by turn  
+- Sudden spikes in emotional pressure  
+- Contextual difference between neutral and hostile replies  
+- Future use of short-term memory to weight recent drift and override impact
 
-Each DriftResult is tagged as "reactive", "proactive", or "neutral", based on tone trajectory.
+---
 
-	•	Use this to distinguish whether the speaker is escalating or replying defensively.
-	•	Helpful for modeling conversational flow or emotional causality.
+## 🧠 Coming Soon — Drift Memory + Field Responsiveness Demo
 
-📚 Override Arbitration (Tiering)
+Scaffolding is already in place for a future interactive demo that showcases:
 
-analyze_drift() prioritizes tone overrides by strength:
-symbolic_override (100)
-mocked_echo (90)
-sarcasm_hint (80)
-negation_amplified (70)
-...
+- Short-term memory tracking across turns
+- Escalation detection (e.g., passive → sarcastic → hostile)
+- Override arbitration with memory decay
+- Field responsiveness (proactive vs. reactive tone shifts)
 
-Only the strongest match triggers a drift label, ensuring predictable override behavior.
+Prototype logic lives in:
+```
+src/lloyd_drift_demo/engine/drift_memory.py
+```
 
-⸻
+---
 
+## 🛠 Drift Thresholds (Tunable)
 
-🚧 Future Version (v1.1 or v2.0)
-	•	Weight override tiers using memory decay + emotional pressure buildup
-	•	Model recursive override reinforcement
-	•	Allow memory to suppress false positives (e.g., one sarcastic line doesn’t = full override if history is stable)
-	🧾 What the README Will Say (Soft Disclaimer + Flexibility)
+Users can modify:
+- `DRIFT_THRESHOLD` (default = 0.15)
+- Emphasis override sensitivity
+- Symbolic override rules
 
-Two very honest, helpful statements:
+Feedback is welcome for future tuning.
 
-✅ 1. Calibration is Limited, but Customizable
+---
 
-“Due to data constraints, LLOYD is lightly calibrated, but designed for easy adaptation to domain-specific tone models.”
+## 💡 Tip: Use ChatGPT as a Temporary Code Lab Assistant
 
-	•	This buys you leeway while inviting contributors
-	•	Also opens door to GoEmotions integration, customer-specific tone schemas, etc.
+You can copy and paste full Python files into ChatGPT to get live analysis, refactors, and debugging help — just like a pair programmer.
 
-✅ 2. Work-in-Progress (WIP) with Feedback Welcome
+✅ Totally legal — as long as it’s your code (or permissively licensed)  
+✅ Session-aware — ChatGPT can remember your pasted files for the whole conversation  
+✅ No training risk — Your code stays private; nothing is used to train the model
 
-“LLOYD is an active work in progress. If you’re interested in contributing ideas, testing use cases, or discussing improvements, I’d love to hear from you. (contact: putmanmodel@pm.me)”
+⚠️ Session memory resets when you refresh, log out, or start a new chat  
+⚠️ Don’t paste private or proprietary code unless you’re sure it’s safe
 
-	•	Personal, open, honest
-	•	Keeps ownership but invites collaboration
-	•	Sets tone that this is not a finished black box, but a system becoming more human
+---
 
-⸻
+## 🗂 Project Structure
+
+```
+lloyd_drift_demo/
+├── devtools/
+│   ├── run.py
+│   └── sandbox_demo/app/app.py
+├── src/lloyd_drift_demo/
+│   ├── engine/
+│   ├── drift_utils.py
+│   └── override_scores.py
+├── media/
+│   └── graph.png
+└── examples/ (planned)
+```
+
+---
+
+## 📦 Requirements
+
+- Python 3.11+
+- `pip install -r requirements.txt`
+
+---
+
+## 🤝 Contribute or Collaborate
+
+This is an active research project.  
+Feedback, testing, and conceptual contributions welcome.
+
+📬 Contact: [putmanmodel@pm.me](mailto:putmanmodel@pm.me)  
+🧵 Twitter/Reddit: [@putmanmodel](https://twitter.com/putmanmodel)
+
+---
+
+## 📚 Credits
+
+- Built on top of the excellent [GoEmotions dataset](https://github.com/google-research/google-research/tree/master/goemotions) from Google Research  
+- Special thanks to the community at [r/datasets](https://www.reddit.com/r/datasets) for sharing valuable resources and inspiration  
+- And to **Lloyd**, my brother — whom I *"accidentally"* named this project after
+
+---
+
+## 📜 License
+
+Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)  
+Use, modify, and remix freely — just don’t sell it.
+
+> “Most sentiment systems end with polarity.  
+> LLOYD starts with meaning.”
