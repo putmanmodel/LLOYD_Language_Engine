@@ -102,7 +102,14 @@ Label    : hostile_emphasis
 Badge    : 🛳 override: hostile_emphasis
 Rationale: Intensified hostile language detected — override triggered.
 ```
-
+```text
+Baseline : Why wasn’t this done earlier?
+Incoming : I had to take out the garbage.
+Drift    : False
+Label    : neutral
+Δ        : 5
+Badge    : none
+Rationale: No drift detected — response remains within expected symbolic frame.
 ---
 
 ## 📊 Drift Graph — Tone Shift Over Time
