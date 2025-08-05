@@ -1,21 +1,19 @@
 import sys
-import os
 from pathlib import Path
 import streamlit as st
 import pandas as pd
 from textblob import TextBlob
 import csv
 from datetime import datetime
+import os
 
 # === Path Setup ===
 APP_DIR = Path(__file__).resolve().parent
-SANDBOX_DIR = APP_DIR.parent
-REPO_ROOT = SANDBOX_DIR.parent.parent
+REPO_ROOT = APP_DIR.parents[4]  # go up to the repo root
+SRC_PATH = REPO_ROOT / "src"
 
-# ✅ Required for Streamlit Cloud to find your src modules
-SRC_PATH = str(REPO_ROOT / "src")
-if SRC_PATH not in sys.path:
-    sys.path.insert(0, SRC_PATH)
+# Inject src/ into sys.path so 'lloyd_drift_demo' is importable
+sys.path.insert(0, str(SRC_PATH))
 
 # === Import Drift Logic ===
 from lloyd_drift_demo.engine.drift_engine import analyze_drift
@@ -23,11 +21,9 @@ import lloyd_drift_demo.engine.drift_engine as dbg
 print("🔥 Using drift_engine from:", dbg.__file__)
 
 # === Log File ===
-OUTPUTS_PATH = SANDBOX_DIR / "outputs"
+OUTPUTS_PATH = APP_DIR.parent / "outputs"
 OUTPUTS_PATH.mkdir(parents=True, exist_ok=True)
 LOG_FILE = OUTPUTS_PATH / "drift_log.csv"
-
-# === Utility Functions ===
 
 def compute_slope(history):
     if len(history) < 2:
@@ -62,8 +58,7 @@ def save_drift_log(row):
 def get_sentiment_polarity(text: str) -> float:
     return float(getattr(TextBlob(text).sentiment, "polarity", 0.0))
 
-# === Streamlit UI ===
-
+# === UI ===
 st.set_page_config(page_title="L.L.O.Y.D. Tone Drift", layout="centered")
 st.title("🎛️ L.L.O.Y.D. Tone Drift Analyzer")
 st.caption("L.L.O.Y.D. emulates unconscious filtering in language and symbol recognition. The logic can apply to multimodal input.")
@@ -153,7 +148,7 @@ if LOG_FILE.exists():
         df = pd.read_csv(LOG_FILE)
         if not df.empty:
             st.markdown("### 📜 Drift Log Preview")
-            st.dataframe(df[::-1], use_container_width=True)  # most recent first
+            st.dataframe(df[::-1], use_container_width=True)
     except Exception as e:
         st.error("⚠️ Could not read the drift log.")
         print("[ERROR] Log load failed:", e)
