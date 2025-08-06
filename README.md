@@ -110,6 +110,8 @@ Label    : neutral
 Δ        : 5
 Badge    : none
 Rationale: No drift detected — response remains within expected symbolic frame.
+```
+
 ---
 
 ## 📊 Drift Graph — Tone Shift Over Time
@@ -170,16 +172,18 @@ You can copy and paste full Python files into ChatGPT to get live analysis, refa
 ## 🗂 Project Structure
 
 ```
-📁 lloyd_drift_demo/
-├── devtools/
-│   ├── run.py
-│   └── sandbox_demo/app/app.py
-├── src/lloyd_drift_demo/
-│   ├── engine/
-│   ├── drift_utils.py
-│   └── override_scores.py
-📁 media/
-└── examples/   # (Planned)
+📁 LLOYD_Language_Engine/
+├── README.md
+├── media/
+│   └── graph.png
+├── src/
+│   └── lloyd_drift_demo/
+│       └── engine/
+│           └── drift_utils_v2.py
+├── demos/
+│   └── sandbox_demo/
+│       └── app/
+│           └── app.py
 ```
 
 ---
