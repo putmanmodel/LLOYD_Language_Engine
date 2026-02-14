@@ -22,12 +22,12 @@ It’s a drift-aware analyzer that tells you when **a conversation turns** — e
 
 From sarcastic reversals to performative breakdowns, LLOYD is designed to detect subtle shifts in tone that traditional NLP often misses.
 
-> ✅ *Calibration is limited, but customizable.*  
-> LLOYD is lightly tuned, but designed for adaptation to domain-specific tone models.
+ ✅ *Calibration is limited, but customizable.*  
+ LLOYD is lightly tuned, but designed for adaptation to domain-specific tone models.
 
-> ✅ *Work-in-progress with feedback welcome.*  
-> This is an active project — contributions, questions, and use-case tests are encouraged.  
-> Contact: [putmanmodel@pm.me](mailto:putmanmodel@pm.me)
+ ✅ *Work-in-progress with feedback welcome.*  
+ This is an active project — contributions, questions, and use-case tests are encouraged.  
+ Contact: [putmanmodel@pm.me](mailto:putmanmodel@pm.me)
 
 ---
 
@@ -45,11 +45,11 @@ Here’s how it stacks up:
 | 🟨 Mid-Level     | Sentiment Classifier  | Polarity scoring, intensity detection         | ⚠️ Misses sarcasm, symbolic shifts, escalation cues     |
 | 🟥 Legacy        | Keyword Matcher       | Token triggers, emotion word lists            | ❌ Fails on nuance, symbolic inversion, or context      |
 
-> 🟢 *LLOYD hears the difference between “Great job” and “Great job…”*  
-> 🔴 *Others just check for “positive” or “negative.”*
+ 🟢 *LLOYD hears the difference between “Great job” and “Great job…”*  
+ 🔴 *Others just check for “positive” or “negative.”*
 
-> **Please note**: LLOYD is already scaffolded for *Drift Memory* and short-term tone weighting —  
-> this table excludes those in-progress features until the official demo drops.
+ **Please note**: LLOYD is already scaffolded for *Drift Memory* and short-term tone weighting —  
+ this table excludes those in-progress features until the official demo drops.
 
 ✨ *It’s better — and it’s not even done yet.*
 
@@ -218,5 +218,6 @@ Feedback, testing, and conceptual contributions welcome.
 Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)  
 Use, modify, and remix freely — just don’t sell it.
 
-> “Most sentiment systems end with polarity.  
-> LLOYD starts with meaning.”
+---
+
+“Most sentiment systems end with polarity. LLOYD starts with meaning.”
